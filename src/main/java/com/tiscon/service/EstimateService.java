@@ -10,6 +10,7 @@ import com.tiscon.dto.UserOrderDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import static java.lang.Math.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +27,16 @@ public class EstimateService {
     private static final int PRICE_PER_DISTANCE = 100;
 
     private final EstimateDao estimateDAO;
+    private final SearchPositionService searchPositionService;
 
     /**
      * コンストラクタ
-     *
      * @param estimateDAO EstimateDaoクラス
+     * @param searchPositionService SearchPositionServiceクラス
      */
-    public EstimateService(EstimateDao estimateDAO) {
+    public EstimateService(EstimateDao estimateDAO, SearchPositionService searchPositionService) {
         this.estimateDAO = estimateDAO;
+        this.searchPositionService = searchPositionService;
     }
 
     /**
@@ -70,7 +73,21 @@ public class EstimateService {
      * @return 概算見積もり結果の料金
      */
     public Integer getPrice(UserOrderDto dto) {
-        double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
+        double distance;
+        try{
+            // ************************* todo: dtoから入力したデータを持ってくる *************************
+            String address_from = "沖縄県";
+            String address_to = "北海道";
+            Double[] pos_from = searchPositionService.search(address_from);
+            Double[] pos_to = searchPositionService.search(address_to);
+            distance = calcDistance(pos_from[0], pos_from[1], pos_to[0], pos_to[1]);
+        }catch(Exception ignored){
+            distance = java.lang.Double.NaN;
+        }
+        // yolp apiからの値で計算できなかったときの処理
+        if(java.lang.Double.isNaN(distance)){
+            distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
+        }
         // 小数点以下を切り捨てる
         int distanceInt = (int) Math.floor(distance);
 
@@ -104,5 +121,30 @@ public class EstimateService {
      */
     private int getBoxForPackage(int packageNum, PackageType type) {
         return packageNum * estimateDAO.getBoxPerPackage(type.getCode());
+    }
+
+    /**
+     *
+     * @param x_1 1つ目のアドレスの緯度
+     * @param y_1 1つ目のアドレスの経度
+     * @param x_2 2つ目のアドレスの緯度
+     * @param y_2 2つ目のアドレスの経度
+     * @return 直線距離
+     */
+    private double calcDistance(double x_1, double y_1, double x_2, double y_2) {
+        // (x緯度 y経度)
+        double r = 6378.137; // 赤道半径[km]
+
+        // (lat = 緯度, lng = 経度)
+        double lat1 = x_1 * PI / 180;
+        double lng1 = y_1 * PI / 180;
+
+        double lat2 = x_2 * PI / 180;
+        double lng2 = y_2 * PI / 180;
+
+        // 2点間の距離[km]
+        double distance = r * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lng2 - lng1));
+
+        return distance;
     }
 }
