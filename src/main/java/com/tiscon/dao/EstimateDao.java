@@ -26,6 +26,7 @@ public class EstimateDao {
      *
      * @param parameterJdbcTemplate NamedParameterJdbcTemplateクラス
      */
+
     public EstimateDao(NamedParameterJdbcTemplate parameterJdbcTemplate) {
         this.parameterJdbcTemplate = parameterJdbcTemplate;
     }

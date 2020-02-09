@@ -8,7 +8,7 @@ body {
 
 .jumbotron {
     background-repeat: no-repeat;
-    background-position: calc(60%) calc(70%);
+    background-position:calc(40%) calc(50%);
     background-image: url("../img/top.jpg");
     background-size: cover;
     height: 100vh;
@@ -16,13 +16,28 @@ body {
     min-height: 300px;
 }
 
-.btn-primary {
-    background: #FBC0AF;
-    border-color: #FBC0AF;
-}
+
 
 .btn-top {
-    width: 30%;
+    display: inline-block;
+      text-decoration: none;
+      color: #FFF;
+      width: 120px;
+      height: 120px;
+      line-height: 100px;
+      border-radius: 50%;
+      text-align: center;
+      overflow: hidden;
+      background-image: linear-gradient(45deg, #709dff 0%, #91fdb7 100%);
+      transition: .4s;
+      font-size: 20px;
+      margin-top:20px;
+
+}
+
+.btn-top:hover {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
 }
 
 .ui.main.container {
@@ -33,7 +48,9 @@ a.logo {
     font-family: 'Exo', sans-serif;
     color: #f33;
 }
-
+.main-container {
+text-align: center;
+}
 .bland-message {
     font-family: "Sawarabi Mincho";
     font-size: 36px;
