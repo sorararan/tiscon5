@@ -52,7 +52,7 @@ public class UserOrderForm {
     private String washingMachine;
 
     @NotNull
-    private Boolean hasWashingMachineSettingOption;
+    private boolean washingMachineInstallation;
 
     public String getCustomerName() {
         return customerName;
@@ -142,11 +142,11 @@ public class UserOrderForm {
         this.washingMachine = washingMachine;
     }
 
-    public Boolean getHasWashingMachineSettingOption() {
-        return hasWashingMachineSettingOption;
+    public boolean getWashingMachineInstallation() {
+        return washingMachineInstallation;
     }
 
-    public void setHasWashingMachineSettingOption(Boolean hasWashingMachineSettingOption) {
-        this.hasWashingMachineSettingOption = hasWashingMachineSettingOption;
+    public void setWashingMachineInstallation(boolean washingMachineInstallation) {
+        this.washingMachineInstallation = washingMachineInstallation;
     }
 }
