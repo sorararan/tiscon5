@@ -16,33 +16,33 @@ import javax.validation.constraints.Size;
  */
 public class UserOrderForm {
     @NotBlank
-    @Size(min = 1, max = 20)
+    @Size(min = 0, max = 20)
     private String customerName;
 
     @NotBlank
     @Numeric
-    @Size(min = 1, max = 11)//電話番号制約
+    @Size(min = 0, max = 11)//電話番号制約
     private String tel;
 
     @Email
     @NotBlank
-    @Size(min = 1, max = 20)
+    @Size(min = 0, max = 20)
     private String email;
 
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     private String oldPrefectureId;
 
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     private String oldAddress;
 
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     private String newPrefectureId;
 
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     private String newAddress;
 
     @Numeric
