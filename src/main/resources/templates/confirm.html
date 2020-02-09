@@ -47,7 +47,7 @@
           <input type="hidden" name="oldPrefectureId" id="oldPrefectureId" th:value="*{oldPrefectureId}"/>
         </tr>
         <tr>
-          <th>転居元住所（市区町村以下）</th>
+          <th>転居元住所（市区町村まで）</th>
           <td><span th:text="*{oldAddress}"></span></td>
           <input type="hidden" name="oldAddress" id="oldAddress" th:value="*{oldAddress}"/>
         </tr>
@@ -59,7 +59,7 @@
           <input type="hidden" name="newPrefectureId" id="newPrefectureId" th:value="*{newPrefectureId}"/>
         </tr>
         <tr>
-          <th>転居先住所（市区町村以下）</th>
+          <th>転居先住所（市区町村まで）</th>
           <td><span th:text="*{newAddress}"></span></td>
           <input type="hidden" name="newAddress" id="newAddress" th:value="*{newAddress}"/>
         </tr>
