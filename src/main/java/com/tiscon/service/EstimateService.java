@@ -76,8 +76,8 @@ public class EstimateService {
         double distance;
         try{
             // ************************* todo: dtoから入力したデータを持ってくる *************************
-            String address_from = "沖縄県";
-            String address_to = "北海道";
+            String address_from = "東京都港区北青山１丁目６番地３号";
+            String address_to = "東京都新宿区信濃町３５";
             Double[] pos_from = searchPositionService.search(address_from);
             Double[] pos_to = searchPositionService.search(address_to);
             distance = calcDistance(pos_from[0], pos_from[1], pos_to[0], pos_to[1]);
@@ -88,11 +88,9 @@ public class EstimateService {
         if(java.lang.Double.isNaN(distance)){
             distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
         }
-        // 小数点以下を切り捨てる
-        int distanceInt = (int) Math.floor(distance);
 
         // 距離当たりの料金を算出する
-        int priceForDistance = distanceInt * PRICE_PER_DISTANCE;
+        int priceForDistance = (int) Math.floor(distance * PRICE_PER_DISTANCE);
 
         int boxes = getBoxForPackage(dto.getBox(), PackageType.BOX)
                 + getBoxForPackage(dto.getBed(), PackageType.BED)
