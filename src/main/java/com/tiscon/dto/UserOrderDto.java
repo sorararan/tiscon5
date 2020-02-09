@@ -23,7 +23,7 @@ public class UserOrderDto {
 
     private String washingMachine;
 
-    private boolean hasWashingMachineSettingOption;
+    private boolean washingMachineInstallation;
 
     public String getCustomerName() {
         return customerName;
@@ -113,11 +113,11 @@ public class UserOrderDto {
         this.washingMachine = washingMachine;
     }
 
-    public boolean hasWashingMachineSettingOption() {
-        return hasWashingMachineSettingOption;
+    public boolean getWashingMachineInstallation() {
+        return washingMachineInstallation;
     }
 
-    public void setWashingMachineSettingOption(Boolean hasWashingMachineSettingOption) {
-        this.hasWashingMachineSettingOption = hasWashingMachineSettingOption;
+    public void setWashingMachineInstallation(Boolean washingMachineInstallation) {
+        this.washingMachineInstallation = washingMachineInstallation;
     }
 }
