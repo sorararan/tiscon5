@@ -47,16 +47,17 @@ public class UserOrderForm {
 
     @Numeric
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 0, max = 100)
     private String box;
 
     @Numeric
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     private String bed;
 
     @Numeric
     @NotBlank
+    @Size(min = 0, max = 50)
     private String bicycle;
 
     @Numeric
