@@ -75,22 +75,22 @@ public class EstimateService {
      */
     public Integer getPrice(UserOrderDto dto) {
         double distance = java.lang.Double.NaN;
-        try{
-            // DAOから住所文字列取得
-            List<Prefecture> prefectures = estimateDAO.getAllPrefectures();
-            String address_from = "";
-            String address_to = "";
-            address_from += prefectures.get(Integer.parseInt(dto.getOldPrefectureId())-1).getPrefectureName();
-            address_to += prefectures.get(Integer.parseInt(dto.getNewPrefectureId())-1).getPrefectureName();
-            address_from += dto.getOldAddress();
-            address_to += dto.getNewAddress();
-
-            // 距離の計算
-            Double[] pos_from = searchPositionService.search(address_from);
-            Double[] pos_to = searchPositionService.search(address_to);
-            distance = calcDistance(pos_from[0], pos_from[1], pos_to[0], pos_to[1]);
-        }catch(Exception ignored){
-        }
+//        try{
+//            // DAOから住所文字列取得
+//            List<Prefecture> prefectures = estimateDAO.getAllPrefectures();
+//            String address_from = "";
+//            String address_to = "";
+//            address_from += prefectures.get(Integer.parseInt(dto.getOldPrefectureId())-1).getPrefectureName();
+//            address_to += prefectures.get(Integer.parseInt(dto.getNewPrefectureId())-1).getPrefectureName();
+//            address_from += dto.getOldAddress();
+//            address_to += dto.getNewAddress();
+//
+//            // 距離の計算
+//            Double[] pos_from = searchPositionService.search(address_from);
+//            Double[] pos_to = searchPositionService.search(address_to);
+//            distance = calcDistance(pos_from[0], pos_from[1], pos_to[0], pos_to[1]);
+//        }catch(Exception ignored){
+//        }
         // yolp apiからの値で計算できなかったときの処理
         if(java.lang.Double.isNaN(distance)){
             distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
